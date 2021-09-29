@@ -84,28 +84,28 @@ class RAM:
 
 def print_ram(w, block, byte_in_block, digit, type):
     ram = RAM(w, block, type)
-    print("有", ram.getNsets(), "个set")
+    print("There are ", ram.getNsets(), " set")
 
     setbit = math.ceil(math.log(ram.getNsets(), 2))
-    print("有", setbit, "个setbit")
+    print("There are ", setbit, " setbit")
 
     offset = math.ceil(math.log(byte_in_block, 2))
-    print("有", offset, "个offsetbit")
+    print("There are ", offset, " offsetbit")
 
     n = 0
     t = 0
     while True:
         ram.printRAM()
         if digit == 2:
-            c = input("输入二进制地址: ")
+            c = input("输入二进制地址(input binary address): ")
         else:
             while True:
-                c = input("输入十六进制地址: ")
+                c = input("输入十六进制地址(input hex address): ")
                 try:
                     c = bin(int(c.upper(), 16))[2:]
                     break
                 except ValueError:
-                    print("请输入正确十六位数字")
+                    print("请输入正确十六位数字(please input the right hex num)")
         currtag = c[0:(len(c) - setbit - offset)]
         print("currtag:", currtag)
         if ram.getNsets() == 1:
@@ -114,22 +114,22 @@ def print_ram(w, block, byte_in_block, digit, type):
             currset = int(c[len(currtag):(len(currtag) + setbit)])
         print("currset:", currset)
         n += ram.check(currtag, currset, t)
-        print("现在有", n, "hit")
-        if input("继续运行吗? Y/N:").upper() == 'N':
+        print("now there are ", n, " hit")
+        if input("Continue? Y/N:").upper() == 'N':
             break
         t += 1
 
 def inp():
-    w = int(input("请输入way: "))
-    b = int(input("请输入blocks数量: "))
-    bb = int(input("请输入一个block有多少bytes: "))
-    type = int(input("输入0为FIFO, 输入1为LRU: "))
+    w = int(input("input way: "))
+    b = int(input("input blocks num: "))
+    bb = int(input("input how many bytes in a block: "))
+    type = int(input("0 for FIFO, 1 for LRU: "))
     if type != 0 and type != 1:
-        print("请输入0或者1")
+        print("please input 0 or 1")
         return
-    digit = int(input("输入2为2进制, 输入16为16进制: "))
+    digit = int(input("2 for binary, 16 for hex: "))
     if digit != 2 and digit != 16:
-        print("请输入2或者16")
+        print("please input 2 or 16")
         return
     print_ram(w, b, bb, digit, type)
 
