@@ -1,6 +1,5 @@
 # -cachehit
 
-CSC258 snacky  
-This is a casual work i did after the test.  
+This is a casual work i did  
 ***DO NOT AO***  
 calculator
